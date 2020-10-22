@@ -1,4 +1,4 @@
-# Android-SerialPort-Tool
+# FindSerialPortTool
 找哪个串口能用
 
 TODO:加载命令列表只支持这种格式
