@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="clickProxy"
+            type="com.licheedev.serialtool.ui.LogFragment.ClickProxy" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/log_bg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_button_height"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/btn_clear_log"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="@{()->clickProxy.clearLog()}"
+                android:text="清除日志"
+                android:textSize="@dimen/default_text_size" />
+
+            <Button
+                android:id="@+id/btn_auto_end"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:onClick="@{()->clickProxy.switchAutoEnd()}"
+                android:layout_weight="1"
+                android:text="自动显示最新日志"
+                android:textSize="@dimen/default_text_size" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLogs"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fastScrollEnabled="true"
+            android:orientation="vertical"
+            tools:listitem="@layout/item_log" />
+
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.licheedev.serialtool.ui.viewmodel.MainViewModel" />
+
+        <variable
+            name="clickProxy"
+            type="com.licheedev.serialtool.ui.MainFragment.ClickProxy" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.licheedev.serialtool.ui.MainFragment"
+        tools:layout_width="@dimen/normal_1000dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_button_height"
+            android:background="@color/colorPrimary"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/horizontal_margin"
+            android:paddingRight="@dimen/horizontal_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin"
+                android:text="@string/select_baud_rate"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_text_size"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_baudrate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorLightBlue"
+                android:textSize="@dimen/default_text_size"
+                tools:entries="@array/baudrates" />
+
+            <Button
+                android:id="@+id/btn_open_device"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/default_button_height"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:onClick="@{()->clickProxy.switchSerialPort()}"
+                android:text="@{viewModel.opened?@string/close_serial_port:@string/open_serial_port}"
+                android:textSize="@dimen/default_text_size"
+                tools:text="@string/open_serial_port" />
+
+            <Button
+                android:id="@+id/btn_load_list"
+                style="@style/ButtonStyle"
+                android:enabled="@{viewModel.opened}"
+                android:layout_width="wrap_content"
+                android:onClick="@{()->clickProxy.loadCommands()}"
+                android:text="@string/load_cmd_list" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            tools:context="com.licheedev.serialtool.ui.MainActivity">
+
+            <EditText
+                android:id="@+id/et_data"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/default_button_height"
+                android:layout_weight="1"
+                android:digits="0123456789abcdefABCDEF"
+                android:hint="@string/input_data"
+                android:inputType="textCapCharacters"
+                android:singleLine="true"
+                android:textSize="@dimen/edit_text_size" />
+
+            <Button
+                android:id="@+id/btn_send_data"
+                style="@style/ButtonStyle"
+                android:layout_width="wrap_content"
+                android:enabled="@{viewModel.opened}"
+                android:onClick="@{()->clickProxy.sendData()}"
+                android:text="@string/send_data" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_load_command_list" />
+
+    </LinearLayout>
+</layout>
+

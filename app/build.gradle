@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+
+    compileSdkVersion 30
+
+    defaultConfig {
+        applicationId "com.licheedev.findserialtool"
+        minSdkVersion 19
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0.0"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                //在这里修改apk文件名
+                //outputFileName = "东莞碾米机-${variant.name}-v${variant.versionName}.apk"
+                outputFileName =
+                    "zhaochuankou_${variant.mergedFlavor.versionName}(${variant.mergedFlavor.versionCode})_${variant.buildType.name}.apk"
+            }
+    }
+    
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    androidTestCompile('androidx.test.espresso:espresso-core:3.1.0', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
+    implementation "androidx.activity:activity-ktx:1.1.0"
+    implementation "androidx.fragment:fragment-ktx:1.2.5"
+
+
+    // 包含base、utils、clickablebg、rxjava2ex、rxjava3ex、widgets
+    implementation("com.licheedev:some-commonlibrary:1.0.11") {
+        // 根据需要，排除掉不需要的rxjava版本，可以两个同时排除掉
+        exclude group: 'com.licheedev', module: 'some-rxjava2ex'
+        exclude group: 'com.licheedev', module: 'some-rxjava3ex'
+    }
+    implementation 'com.licheedev:some-ext:1.0.9'
+    implementation 'com.github.licheedev.CommonSize:common_size_w1080_n1920:1.3.1'
+    // 串口
+    implementation 'com.licheedev:android-serialport:2.1.2'
+    // 选文件的
+    implementation 'ru.bartwell:exfilepicker:2.1'
+
+
+
+ 
+}
+repositories {
+    mavenCentral()
+}
