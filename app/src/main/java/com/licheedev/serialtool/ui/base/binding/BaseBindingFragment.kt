@@ -1,11 +1,12 @@
 package com.licheedev.serialtool.ui.base.binding
 
-import BaseFragment
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
+import com.licheedev.serialtool.ui.base.BaseFragment
 
 
 abstract class BaseBindingFragment<T : ViewDataBinding> : BaseFragment() {

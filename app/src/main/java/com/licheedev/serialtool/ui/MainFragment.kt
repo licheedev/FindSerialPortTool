@@ -125,7 +125,9 @@ class MainFragment : BaseBindingFragment<FragmentMainBinding>() {
 
                     val opened = withContext(Dispatchers.IO) {
                         val baudrate = mBaudrates[mBaudrateIndex].toInt()
-                        SerialPortManager.instance().open(baudrate, deviceFilter)
+                        
+                        //SerialPortManager.instance().open(baudrate, deviceFilter)
+                        SerialPortManager.instance().open(baudrate, null)
                     }
 
                     dismissDelayWaitingDialog()
